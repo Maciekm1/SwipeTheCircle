@@ -8,6 +8,7 @@ using System;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private ShopManager shopManager;
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject playButtonOuter;
     [SerializeField] private TextMeshProUGUI titleText;
@@ -46,6 +47,11 @@ public class UIManager : MonoBehaviour
             lives[i].SetActive(true);
             lives[i].transform.localScale = new Vector3(1f, 1f, 1f);
         }
+    }
+
+    public void ChangeCirclePattern(int i)
+    {
+        playButton.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = shopManager.GetShopItem(i).Sprite;
     }
 
     public void updateStarsUI() => starsText.text = gameManager.Stars.ToString();

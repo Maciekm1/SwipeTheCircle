@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private UIManager uIManager;
     [Header("Circle")]
     [SerializeField] private ShopItem[] shopItems;
     [SerializeField] private GameObject[] panels;
@@ -17,32 +18,81 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        updateShopButtons();
+        //UpdateShopButtons();
     }
 
-    private void updateShopButtons()
+    public void UpdateShopButtons()
     {
         for (int i = 0; i < gameManager.unlockables.circlePatterns.Length; i++)
         {
-            // 1 - Purchased, 2 - Equipped
-            if(gameManager.unlockables.circlePatterns[i] == 1)
+            if(gameManager.unlockables.currentCirclePattern == i)
             {
-                costButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "equip";
-                costButtons[i].GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                costButtons[i].GetComponent<Image>().color = new Color32(0, 160, 0, 255);
+                costButtons[i].GetComponentInChildren<TextMeshProUGUI>().fontSize = 20;
+                costButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "equipped";
+                costButtons[i].interactable = false;
+
+                int x = i;
+                costButtons[i].onClick.RemoveAllListeners();
+
+                costButtons[i].transform.GetChild(0).GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
                 //Deactivate star icon
                 costButtons[i].transform.GetChild(1).gameObject.SetActive(false);
             }
-            else if(gameManager.unlockables.circlePatterns[i] == 2)
+            else if(gameManager.unlockables.circlePatterns[i] == 1)
             {
-                costButtons[i].GetComponent<Image>().color = new Color32(0, 90, 0, 255);
-                costButtons[i].GetComponentInChildren<TextMeshProUGUI>().fontSize = 20;
-                costButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "equipped";
+                costButtons[i].interactable = true;
+                costButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "equip";
+                costButtons[i].GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+
+                int x = i;
+                costButtons[i].onClick.RemoveAllListeners();
+                costButtons[i].onClick.AddListener(delegate {equipCirclePattern(x);});
                 costButtons[i].transform.GetChild(0).GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
-                //Disable Star
+                //Deactivate star icon
                 costButtons[i].transform.GetChild(1).gameObject.SetActive(false);
             }
+            else if(gameManager.unlockables.circlePatterns[i] == 0)
+            {
+                int x = i;
+                costButtons[i].onClick.RemoveAllListeners();
+                costButtons[i].onClick.AddListener(delegate {PurchaseItem(x);});
+            }
+
+            // Update circle pattern
+            if(gameManager.GetGameState() == GameState.InGame){
+                uIManager.ChangeCirclePattern(gameManager.unlockables.currentCirclePattern);
+            }
+        }
+    }
+
+    public ShopItem GetShopItem(int i){
+        return shopItems[i];
+    }
+
+    private void equipCirclePattern(int i)
+    {
+        gameManager.unlockables.currentCirclePattern = i;
+        gameManager.saveUnlockables();
+
+        UpdateShopButtons();
+    }
+
+    private void PurchaseItem(int i)
+    {
+        if(gameManager.Stars >= shopItems[i].Cost){
+
+            gameManager.Stars -= shopItems[i].Cost;
+            uIManager.updateStarsUI();
+            check_purchasable();
+
+            gameManager.unlockables.circlePatterns[i] = 1;
+            gameManager.saveUnlockables();
+
+            Debug.Log($"Purchase successful for {shopItems[i].Cost}");
+            UpdateShopButtons();
         }
     }
     public void enablePanels(){
@@ -52,7 +102,7 @@ public class ShopManager : MonoBehaviour
             panels[i].SetActive(true);
             sprites[i].sprite = shopItems[i].Sprite;
             Button costButton = costButtons[i];
-            if(gameManager.unlockables.circlePatterns[i] == 0)
+            if(gameManager.unlockables.circlePatterns[i] == 0 && gameManager.unlockables.currentCirclePattern != i)
             {
                 costButton.GetComponentInChildren<TextMeshProUGUI>().text = shopItems[i].Cost.ToString();
             }

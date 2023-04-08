@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void Awake() // TODO - init Stars
     {
         unlockablesPath = $"{Application.persistentDataPath}/unlockables.json";
-        Stars = 0;
+        Stars = 1000;
         ResetCurrentGameStats();
         GameDifficulty = (GameDifficultyEnum)Enum.Parse(typeof(GameDifficultyEnum), PlayerPrefs.GetString("GameDifficulty", "Medium"));
         uiManager.UpdateDifficultyText();
@@ -74,7 +74,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            unlockables.circlePatterns = new int[5] {2, 0, 0, 0, 0};
+            unlockables.currentCirclePattern = 0;
+            unlockables.circlePatterns = new int[10] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             saveUnlockables();
         }
     }
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
         unlockables = JsonUtility.FromJson<Unlockables>(json);
     }
 
-    private void saveUnlockables()
+    public void saveUnlockables()
     {
         string json = JsonUtility.ToJson(unlockables);
         File.WriteAllText(unlockablesPath, json);
@@ -156,6 +157,9 @@ public class GameManager : MonoBehaviour
             case GameState.LogIn:
                 break;
             case GameState.MainMenu:
+                // load normal colour/no pattern
+                uiManager.ChangeCirclePattern(0);
+                MainMenuGO.transform.position = new Vector3(213f, MainMenuGO.transform.position.y, MainMenuGO.transform.position.z);
                 ChangeUIState(State.MainMenuIdle);
                 uiManager.UpdateGameElementsToMainMenu();
                 /*
@@ -166,6 +170,7 @@ public class GameManager : MonoBehaviour
                 */
                 break;
             case GameState.InGame:
+                uiManager.ChangeCirclePattern(unlockables.currentCirclePattern);
                 ChangeUIState(State.InGameIdle);
                 uiManager.UpdateGameElementsToInGame();
                 break;
@@ -227,7 +232,8 @@ public class GameManager : MonoBehaviour
         if(_gameState == GameState.InGame){
             if (CurrentColor.ToString() == TargetColor.ToString())
             {
-                Score += 1;
+                Score++;
+                Stars++;
                 OnPointGain?.Invoke();
             }
             else
