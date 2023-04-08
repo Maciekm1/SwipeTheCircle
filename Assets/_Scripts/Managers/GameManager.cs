@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action OnGameLose;
 
+    private Vector3 mainmenuPos;
+
     // Score
     public int Score { get; set; }
     public int Stars{ get; set; }
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake() // TODO - init Stars
     {
+        mainmenuPos = MainMenuGO.transform.position;
         unlockablesPath = $"{Application.persistentDataPath}/unlockables.json";
         Stars = 1000;
         ResetCurrentGameStats();
@@ -159,7 +162,8 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 // load normal colour/no pattern
                 uiManager.ChangeCirclePattern(0);
-                MainMenuGO.transform.position = new Vector3(213f, MainMenuGO.transform.position.y, MainMenuGO.transform.position.z);
+
+                MainMenuGO.transform.position = mainmenuPos;
                 ChangeUIState(State.MainMenuIdle);
                 uiManager.UpdateGameElementsToMainMenu();
                 /*
