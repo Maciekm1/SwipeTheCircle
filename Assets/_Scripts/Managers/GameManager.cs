@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            unlockables.circlePatterns = new int[5] {1, 0, 0, 0, 0};
+            unlockables.circlePatterns = new int[5] {2, 0, 0, 0, 0};
             saveUnlockables();
         }
     }

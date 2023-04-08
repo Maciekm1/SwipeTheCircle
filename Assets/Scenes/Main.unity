@@ -11829,6 +11829,8 @@ MonoBehaviour:
   - {fileID: 513540400}
   - {fileID: 190922733}
   MainMenuGO: {fileID: 1444128433}
+  <unlockables>k__BackingField:
+    circlePatterns: 
   <GameDifficulty>k__BackingField: 1
   <Lives>k__BackingField: 0
   colorChangeSpeed: 1
@@ -15313,6 +15315,7 @@ MonoBehaviour:
   - {fileID: 1747882364}
   - {fileID: 746249570}
   - {fileID: 2036080950}
+  tickSprite: {fileID: 21300000, guid: f9282d6b0d0a34329938749fc665d6ba, type: 3}
 --- !u!1 &2018228258
 GameObject:
   m_ObjectHideFlags: 0
