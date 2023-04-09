@@ -1,9 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.Services.CloudSave;
 using System.IO;
+using Unity.Services.Leaderboards;
+using Newtonsoft.Json;
+using Unity.Services.Leaderboards.Models;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<UIState> UIStateObjects;
     [SerializeField] GameObject MainMenuGO;
 
-    [field:SerializeField] public Unlockables unlockables {get; set;}
+    public LeaderboardScoresPage LeaderboardData {get; private set;}
+
+    [field:SerializeField] public Unlockables unlockables { get; set; }
     private string unlockablesPath;
 
     // Events
@@ -126,7 +130,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_gameState);
         ExecuteStateUpdate();
     }
 
@@ -254,11 +257,15 @@ public class GameManager : MonoBehaviour
                 {
                     if(Score > HighScore)
                     {
-                        Debug.Log(Score);
-                        Debug.Log(HighScore);
+                        // Save highscore to the cloud
                         cloudSaveManager.SaveCloudData(Score, HsSaveKey);
                         HighScore = Score;
                         uiManager.UpdateHighScoreUI(HighScore.ToString());
+
+                        // Add new highscore to the leaderboard
+                        AddScoreToLB(HighScore);
+                        GetScoresFromLB();
+
                     }
                     OnGameLose?.Invoke();
                     ChangeGameState(GameState.Lose);
@@ -270,12 +277,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public async void AddScoreToLB(int score)
+    {
+        var playerEntry = await LeaderboardsService.Instance.AddPlayerScoreAsync("ColourSwipeLB", score);
+        //Debug.Log(JsonConvert.SerializeObject(playerEntry));
+    }
+
+    public async void GetScoresFromLB()
+    {
+        // Returns top x results (limit 10)
+        LeaderboardData = await LeaderboardsService.Instance.GetScoresAsync("ColourSwipeLB");
+    }
+       
+
     public void UpdateScore(int newScore)
     {
         Score = newScore;
         uiManager.UpdateScoreUI(newScore.ToString());
     }
 }
+
 
 public enum GameState
 {

@@ -156,7 +156,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.0.2",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -190,12 +190,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.authentication": {
-      "version": "2.4.0",
-      "depth": 1,
+      "version": "2.5.0-pre.3",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.0.2",
-        "com.unity.services.core": "1.7.0",
+        "com.unity.services.core": "1.8.1",
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.ugui": "1.0.0"
       },
@@ -221,6 +221,15 @@
         "com.unity.modules.androidjni": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.unity.services.leaderboards": {
+      "version": "file:/Users/maciek/Downloads/com.unity.services.leaderboards-1.0.0-exp.1.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.services.authentication": "2.3.1",
+        "com.unity.services.core": "1.5.2"
+      }
     },
     "com.unity.shadergraph": {
       "version": "12.1.10",

@@ -6,10 +6,13 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
 using System;
+using Newtonsoft.Json;
 
 public class CloudSaveManager : MonoBehaviour
 {
     GameManager gameManager;
+
+    public string PlayerName {get; set;}
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
@@ -17,14 +20,21 @@ public class CloudSaveManager : MonoBehaviour
     public async void AnonLoginButtonClicked() {
         await UnityServices.InitializeAsync();
         await SignInAnon();
+
         gameManager.LoadHighScore();
+
+        // Load LB scores
+        gameManager.GetScoresFromLB();
         
     }
 
+    // TODO - implement first time login and name set using this PlayerPrefs key - "unity.player_sessionid", if its not there -> first time login, otherwise login normally.
     private async Task SignInAnon(){
         AuthenticationService.Instance.SignedIn += () => {
             string playerId = AuthenticationService.Instance.PlayerId;
-            Debug.Log("Signed in as: " + playerId);
+            PlayerName = AuthenticationService.Instance.PlayerName;
+
+            Debug.Log("Signed in as: " + PlayerName);
 
         };
         AuthenticationService.Instance.SignInFailed += s =>
