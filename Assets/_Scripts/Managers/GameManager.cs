@@ -264,7 +264,6 @@ public class GameManager : MonoBehaviour
 
                         // Add new highscore to the leaderboard
                         AddScoreToLB(HighScore);
-                        GetScoresFromLB();
 
                     }
                     OnGameLose?.Invoke();
@@ -281,12 +280,13 @@ public class GameManager : MonoBehaviour
     {
         var playerEntry = await LeaderboardsService.Instance.AddPlayerScoreAsync("ColourSwipeLB", score);
         //Debug.Log(JsonConvert.SerializeObject(playerEntry));
+        GetScoresFromLB();
     }
 
     public async void GetScoresFromLB()
     {
-        // Returns top x results (limit 10)
-        LeaderboardData = await LeaderboardsService.Instance.GetScoresAsync("ColourSwipeLB");
+        // Returns top x results (limit 50)
+        LeaderboardData = await LeaderboardsService.Instance.GetScoresAsync("ColourSwipeLB", new GetScoresOptions{ Limit = 50 });
     }
        
 

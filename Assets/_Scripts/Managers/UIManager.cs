@@ -24,7 +24,8 @@ public class UIManager : MonoBehaviour
     // ShopUI
     [SerializeField] private TextMeshProUGUI starsText;
 
-    [SerializeField] private Image equipButton;
+    [SerializeField] private GameObject logInButton;
+    [SerializeField] private GameObject NameInput;
 
     private void Awake()
     {
@@ -77,6 +78,13 @@ public class UIManager : MonoBehaviour
         targetColour.GetComponent<Image>().color = color;
     }
 
+    public void NameInputAppear()
+    {
+        LeanTween.scale(logInButton, Vector3.zero, 0.5f).setOnComplete(() => 
+            LeanTween.scale(NameInput, Vector3.one, 0.5f)
+        );
+    }
+
     private void OnTap()
     {
         if(gameManager.GetGameState() == GameState.InGame || gameManager.GetGameState() == GameState.Lose)
@@ -92,9 +100,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateScoreUI(String score)
+    public void UpdateScoreUI(string score)
     {
         titleText.text = score;
+    }
+
+    public string GetNameInput()
+    {
+        return NameInput.GetComponentInChildren<TMP_InputField>().text;
     }
 
     public void UpdateGameElementsToInGame()

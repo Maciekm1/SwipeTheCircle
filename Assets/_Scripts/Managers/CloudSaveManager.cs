@@ -10,22 +10,50 @@ using Newtonsoft.Json;
 
 public class CloudSaveManager : MonoBehaviour
 {
+    UIManager uIManager;
     GameManager gameManager;
 
     public string PlayerName {get; set;}
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
+        uIManager = FindObjectOfType<UIManager>();
     }
     public async void AnonLoginButtonClicked() {
         await UnityServices.InitializeAsync();
         await SignInAnon();
 
-        gameManager.LoadHighScore();
+        if(!(PlayerPrefs.GetInt("first-run", 0) == 0))
+        {
+            LoadMainMenu();
+        }
+        else
+        {
+            uIManager.NameInputAppear();
+        }
+        
+    }
 
+    private void LoadMainMenu()
+    {
+        FindObjectOfType<SceneManager>().LoadMainMenu();
+        gameManager.ChangeGameState(1);
+        gameManager.LoadHighScore();
         // Load LB scores
         gameManager.GetScoresFromLB();
-        
+    }
+
+    public void ValidateName()
+    {
+        string s = uIManager.GetNameInput();
+        addNameToCloud(s);
+    }
+
+    private void addNameToCloud(string name)
+    {
+        AuthenticationService.Instance.UpdatePlayerNameAsync(name);
+        PlayerPrefs.SetInt("first-run", 1);
+        LoadMainMenu();
     }
 
     // TODO - implement first time login and name set using this PlayerPrefs key - "unity.player_sessionid", if its not there -> first time login, otherwise login normally.
