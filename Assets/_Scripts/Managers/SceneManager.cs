@@ -31,28 +31,35 @@ public class SceneManager : MonoBehaviour
 
     public void LoadInfo()
     {
+        if(gameManager.GetGameState() != GameState.Lose)
+        {
         MainMenu.SetActive(false);
         Settings.SetActive(false);
         Info.SetActive(true);
         Shop.SetActive(false);
         LeaderBoard.SetActive(false);
+        }
     }
 
     public void LoadShop()
     {
+        if(gameManager.GetGameState() != GameState.Lose){
         MainMenu.SetActive(false);
         Settings.SetActive(false);
         Info.SetActive(false);
         Shop.SetActive(true);
         LeaderBoard.SetActive(false);
+        }
     }
 
     public void LoadLeaderBoard()
     {
+        if(gameManager.GetGameState() != GameState.Lose){
         MainMenu.SetActive(false);
         Settings.SetActive(false);
         Info.SetActive(false);
         Shop.SetActive(false);
         LeaderBoard.SetActive(true);
+        }
     }
 }

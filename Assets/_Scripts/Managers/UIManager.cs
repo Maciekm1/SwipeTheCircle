@@ -23,8 +23,6 @@ public class UIManager : MonoBehaviour
 
     // ShopUI
     [SerializeField] private TextMeshProUGUI starsText;
-
-    [SerializeField] private GameObject logInButton;
     [SerializeField] private GameObject NameInput;
 
     private void Awake()
@@ -80,9 +78,7 @@ public class UIManager : MonoBehaviour
 
     public void NameInputAppear()
     {
-        LeanTween.scale(logInButton, Vector3.zero, 0.5f).setOnComplete(() => 
-            LeanTween.scale(NameInput, Vector3.one, 0.5f)
-        );
+        LeanTween.scale(NameInput, Vector3.one, 0.5f);
     }
 
     private void OnTap()
@@ -107,7 +103,7 @@ public class UIManager : MonoBehaviour
 
     public string GetNameInput()
     {
-        return NameInput.GetComponentInChildren<TMP_InputField>().text;
+        return NameInput.transform.GetChild(0).GetComponent<TMP_InputField>().text;
     }
 
     public void UpdateGameElementsToInGame()
