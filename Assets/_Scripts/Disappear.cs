@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 public class Disappear : MonoBehaviour
 {
 
-    public async void ChangeText(string t, int dur, Action callback)
+    public async void ChangeText(string t, int dur)
     {
         GetComponent<TextMeshProUGUI>().text = t;
         await Task.Delay(dur);
-        callback();
+        LeanDisappear();
     }
 
     public void LeanDisappear()

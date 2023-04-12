@@ -14,8 +14,7 @@ public class CloudSaveManager : MonoBehaviour
     private UIManager uiManager;
     private GameManager gameManager;
 
-    // Properties
-    public string PlayerName { get; set; }
+    [SerializeField] InputObject input_lb;
 
     private async void Start()
     {
@@ -59,11 +58,8 @@ public class CloudSaveManager : MonoBehaviour
 
     public void ValidateName()
     {
-        // Get the player's name from the UI
-        PlayerName = uiManager.GetNameInput();
-
         // Add the name to the cloud save service
-        AddNameToCloud();
+        AddNameToCloud(input_lb.GetNameInput());
 
         // Set a flag to indicate that the app has been run before
         PlayerPrefs.SetInt("first-run", 1);
@@ -77,7 +73,7 @@ public class CloudSaveManager : MonoBehaviour
         // Subscribe to events that occur after signing in
         AuthenticationService.Instance.SignedIn += () =>
         {
-            AuthenticationService.Instance.UpdatePlayerNameAsync(PlayerName);
+            Debug.Log("Signed in as" + AuthenticationService.Instance.GetPlayerNameAsync().ToString());
         };
         AuthenticationService.Instance.SignInFailed += s =>
         {
@@ -98,12 +94,10 @@ public class CloudSaveManager : MonoBehaviour
         await CloudSaveService.Instance.Data.ForceSaveAsync(data);
     }
 
-    private void AddNameToCloud()
+    private async void AddNameToCloud(string s)
     {
-        // Create a dictionary with the player's name as the value
-        var data = new Dictionary<string, object>{ { "player_name", PlayerName } };
-
-        // Save the data to the cloud using the cloud save service
-        CloudSaveService.Instance.Data.ForceSaveAsync(data);
+        await AuthenticationService.Instance.UpdatePlayerNameAsync(s);
+        FindObjectOfType<Disappear>().ChangeText(AuthenticationService.Instance.PlayerInfo.ToString(), 2);
+        // SaveCloudData(PlayerName, "player-name")
     }
 }
