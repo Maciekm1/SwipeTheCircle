@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
 
     // ShopUI
     [SerializeField] private TextMeshProUGUI starsText;
-    [SerializeField] private GameObject NameInput;
     [SerializeField] private GameObject anonButton;
 
     private void Awake()
@@ -75,13 +74,6 @@ public class UIManager : MonoBehaviour
     public void UpdateTargetColor(Color32 color)
     {
         targetColour.GetComponent<Image>().color = color;
-    }
-
-    public void NameInputAppear()
-    {
-        LeanTween.scale(anonButton, Vector3.zero, 0.25f).setOnComplete(() => 
-            LeanTween.scale(NameInput, Vector3.one, 0.25f)
-        );
     }
 
     private void OnTap()

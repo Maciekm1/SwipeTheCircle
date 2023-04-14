@@ -6,6 +6,7 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
 using Newtonsoft.Json;
+using System;
 using TMPro;
 
 public class CloudSaveManager : MonoBehaviour
@@ -13,8 +14,10 @@ public class CloudSaveManager : MonoBehaviour
     // Fields
     private UIManager uiManager;
     private GameManager gameManager;
+    public static event Action OnUserLogin;
+    [SerializeField] private LeaderBoardUIManager leaderBoardUIManager;
 
-    [SerializeField] InputObject input_lb;
+    [SerializeField] TMP_InputField input_lb;
 
     private async void Start()
     {
@@ -31,16 +34,9 @@ public class CloudSaveManager : MonoBehaviour
         // Sign in anonymously using Unity Services Authentication
         await SignInAnon();
 
-        // If the app has been run before, load the main menu
-        if (PlayerPrefs.GetInt("first-run", 0) != 0)
-        {
-            LoadMainMenu();
-        }
-        // Otherwise, prompt the user for their name
-        else
-        {
-            uiManager.NameInputAppear();
-        }
+        //load the main menu
+        OnUserLogin?.Invoke();
+        LoadMainMenu();
     }
 
     private void LoadMainMenu()
@@ -51,21 +47,19 @@ public class CloudSaveManager : MonoBehaviour
         // Update the game state and load high scores
         gameManager.ChangeGameState(1);
         gameManager.LoadHighScore();
-
-        // Load leaderboard scores
-        gameManager.GetScoresFromLB();
     }
 
     public void ValidateName()
     {
+        if(gameManager.Stars < 100){
+            return;
+        }
+        gameManager.Stars -= 100;
         // Add the name to the cloud save service
-        AddNameToCloud(input_lb.GetNameInput());
-
-        // Set a flag to indicate that the app has been run before
-        PlayerPrefs.SetInt("first-run", 1);
-
-        // Load the main menu
-        LoadMainMenu();
+        AddNameToCloud(input_lb.text);
+        input_lb.text = "";
+        
+        Debug.Log("Player name updated");
     }
 
     private async Task SignInAnon()
@@ -73,7 +67,7 @@ public class CloudSaveManager : MonoBehaviour
         // Subscribe to events that occur after signing in
         AuthenticationService.Instance.SignedIn += () =>
         {
-            Debug.Log("Signed in as" + AuthenticationService.Instance.GetPlayerNameAsync().ToString());
+            Debug.Log("Signed in as" + AuthenticationService.Instance.PlayerName);
         };
         AuthenticationService.Instance.SignInFailed += s =>
         {
@@ -96,8 +90,7 @@ public class CloudSaveManager : MonoBehaviour
 
     private async void AddNameToCloud(string s)
     {
+        // Currently has a bug of not disposing a native array
         await AuthenticationService.Instance.UpdatePlayerNameAsync(s);
-        FindObjectOfType<Disappear>().ChangeText(AuthenticationService.Instance.PlayerInfo.ToString(), 2);
-        // SaveCloudData(PlayerName, "player-name")
     }
 }
