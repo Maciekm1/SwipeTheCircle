@@ -39,6 +39,11 @@ public class LeaderBoardUIManager : MonoBehaviour
                 content.GetChild(i + 1).transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = results[i].Tier;
                 content.GetChild(i + 1).transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = results[i].PlayerName.Split("#")[0];
                 content.GetChild(i + 1).transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>().text = Int32.Parse(results[i].Score.Split(".")[0]).ToString();
+
+                if(results[i].PlayerName.Split("#")[0] == PlayerPrefs.GetString("player-name"))
+                {
+                    content.GetChild(i + 1).transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 242, 102, 255);
+                }
             }
             else
             {
