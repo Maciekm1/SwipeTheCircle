@@ -13,6 +13,7 @@ public class CloudSaveManager : MonoBehaviour
 {
     // Fields
     private UIManager uiManager;
+    private ShopManager shopManager;
     private GameManager gameManager;
     public static event Action OnUserLogin;
     [SerializeField] private LeaderBoardUIManager leaderBoardUIManager;
@@ -24,9 +25,13 @@ public class CloudSaveManager : MonoBehaviour
         // Get the necessary components
         gameManager = FindObjectOfType<GameManager>();
         uiManager = FindObjectOfType<UIManager>();
+        shopManager = FindObjectOfType<ShopManager>();
+
+        input_lb.characterLimit = 10;
 
         // Initialize Unity Services (cloud save and authentication)
         await UnityServices.InitializeAsync();
+        AnonLoginButtonClicked();
     }
 
     public async void AnonLoginButtonClicked()
@@ -51,7 +56,7 @@ public class CloudSaveManager : MonoBehaviour
 
     public void ValidateName()
     {
-        if(gameManager.Stars < 100){
+        if(gameManager.Stars < 100 || input_lb.text.Contains(" ") || input_lb.text == ""){
             return;
         }
         gameManager.Stars -= 100;
@@ -92,5 +97,7 @@ public class CloudSaveManager : MonoBehaviour
     {
         // Currently has a bug of not disposing a native array
         await AuthenticationService.Instance.UpdatePlayerNameAsync(s);
+        PlayerPrefs.SetString("player-name", AuthenticationService.Instance.PlayerName.Split("#")[0]);
+        shopManager.updateShopName();
     }
 }

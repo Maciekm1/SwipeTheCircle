@@ -13,12 +13,15 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject[] panels;
     [SerializeField] private Image[] sprites;
     [SerializeField] private Button[] costButtons;
-
-    [SerializeField] private Sprite tickSprite;
+    [SerializeField] private TextMeshProUGUI nameText;
 
     private void Start()
     {
-        //UpdateShopButtons();
+        updateShopName();
+    }
+
+    public void updateShopName(){
+        nameText.text = PlayerPrefs.GetString("player-name", "-");
     }
 
     public void UpdateShopButtons()
