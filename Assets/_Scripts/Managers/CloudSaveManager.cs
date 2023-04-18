@@ -27,7 +27,7 @@ public class CloudSaveManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         shopManager = FindObjectOfType<ShopManager>();
 
-        input_lb.characterLimit = 10;
+        //input_lb.characterLimit = 10;
 
         // Initialize Unity Services (cloud save and authentication)
         await UnityServices.InitializeAsync();
@@ -60,8 +60,10 @@ public class CloudSaveManager : MonoBehaviour
             return;
         }
         gameManager.Stars -= 100;
+        uiManager.updateStarsUI();
         // Add the name to the cloud save service
         AddNameToCloud(input_lb.text);
+        shopManager.updateShopName(input_lb.text);
         input_lb.text = "";
         
         Debug.Log("Player name updated");
@@ -96,8 +98,20 @@ public class CloudSaveManager : MonoBehaviour
     private async void AddNameToCloud(string s)
     {
         // Currently has a bug of not disposing a native array
+        try
+        {
         await AuthenticationService.Instance.UpdatePlayerNameAsync(s);
-        PlayerPrefs.SetString("player-name", AuthenticationService.Instance.PlayerName.Split("#")[0]);
+        await AuthenticationService.Instance.GetPlayerNameAsync();
+        PlayerPrefs.SetString("playerName", AuthenticationService.Instance.PlayerName.Split("#")[0]);
         shopManager.updateShopName();
+        }
+        catch (AuthenticationException e)
+        {
+            input_lb.text = e.ToString();
+        }
+        catch (RequestFailedException e)
+        {
+            input_lb.text = e.ToString();
+        }
     }
 }

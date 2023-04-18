@@ -10,7 +10,7 @@
     "com.unity.services.authentication": "2.5.0-pre.3",
     "com.unity.services.cloudsave": "2.0.1",
     "com.unity.services.leaderboards": "file:/Users/maciek/Downloads/com.unity.services.leaderboards-1.0.0-exp.1.tgz",
-    "com.unity.test-framework": "1.1.31",
+    "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.6.4",
     "com.unity.ugui": "1.0.0",

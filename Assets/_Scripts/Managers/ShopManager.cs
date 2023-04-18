@@ -21,7 +21,11 @@ public class ShopManager : MonoBehaviour
     }
 
     public void updateShopName(){
-        nameText.text = PlayerPrefs.GetString("player-name", "-");
+        nameText.text = PlayerPrefs.GetString("playerName", "--");
+    }
+
+    public void updateShopName(string inp){
+        nameText.text = inp;
     }
 
     public void UpdateShopButtons()
