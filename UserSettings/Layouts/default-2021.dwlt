@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 463
     width: 357
     height: 432
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 97
+  controlID: 53
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 156
+  controlID: 29
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 157
+  controlID: 30
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -732,7 +732,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 3070ffffd870ffffd273ffff5a7effff027ffffffc81ffff2898ffffd298ffffcc9bffff9aabffff26fbffff1c2c0100a02d0100
+      m_ExpandedIDs: 9c7bffff467cffff407fffff8c89ffff348affffea8affff0c95ffffb495ffffd098ffff76bbffff1ebcffff18bffffff2e0ffff9ce1ffff98e4ffff26fbffff604b0100d24c0100e64f010014530100ba6501002c670100ba9001002c920100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -840,22 +840,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Scripts/Managers
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/_Scripts/Managers
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/maciek/Documents/GitHub/SwipeTheCircle
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 747a0000
-    m_LastClickedID: 31348
-    m_ExpandedIDs: 00000000187a00001a7a00001c7a00001e7a0000207a000000ca9a3b
+    m_SelectedIDs: 087a0000
+    m_LastClickedID: 31240
+    m_ExpandedIDs: 00000000027a0000047a0000067a0000087a00000a7a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -883,7 +883,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000187a00001a7a00001c7a00001e7a0000207a0000
+    m_ExpandedIDs: 00000000027a0000047a0000067a0000087a00000a7a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 00000000449c00003e7700003c780000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 480, y: 853}
+  m_TargetSize: {x: 426, y: 853}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -983,14 +983,14 @@ MonoBehaviour:
   m_VSyncEnabled: 0
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 0000000000000000000000000d000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 0000000000000000000000000f000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -120
-    m_HBaseRangeMax: 120
+    m_HBaseRangeMin: -106.5
+    m_HBaseRangeMax: 106.5
     m_VBaseRangeMin: -213.25
     m_VBaseRangeMax: 213.25
     m_HAllowExceedBaseRangeMin: 1
@@ -1313,9 +1313,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 133.76108, y: 410.29117, z: -4.5017967}
+    m_Target: {x: 68.70623, y: 471.3005, z: -5.375044}
     speed: 2
-    m_Value: {x: 133.76108, y: 410.29117, z: -4.5017967}
+    m_Value: {x: 68.70623, y: 471.3005, z: -5.375044}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1366,9 +1366,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 400.81854
+    m_Target: 488.14346
     speed: 2
-    m_Value: 400.81854
+    m_Value: 488.14346
   m_Ortho:
     m_Target: 1
     speed: 2
