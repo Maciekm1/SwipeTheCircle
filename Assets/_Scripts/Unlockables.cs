@@ -6,4 +6,6 @@ public class Unlockables
 {
     public int currentCirclePattern;
     public int[] circlePatterns;
+
+    public int stars;
 }

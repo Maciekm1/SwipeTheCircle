@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
     private float timer;
     public float targetTimer { get; set; }
 
+    [SerializeField] private PopUpText starPopup;
+
     private Vector3 mainmenuPos;
 
     // Initializes the game manager
@@ -67,8 +69,7 @@ public class GameManager : MonoBehaviour
         mainmenuPos = MainMenuGO.transform.position;
         // Set the path for the unlockables file
         unlockablesPath = $"{Application.persistentDataPath}/unlockables.json";
-        // Set the stars to 1000 and reset the game stats
-        Stars = 1000;
+
         ResetCurrentGameStats();
         // Set the game difficulty to the saved value or medium by default, and update the UI
         GameDifficulty = (GameDifficultyEnum)Enum.Parse(typeof(GameDifficultyEnum), PlayerPrefs.GetString("GameDifficulty", "Medium"));
@@ -95,6 +96,7 @@ private void Start()
     {
         unlockables.currentCirclePattern = 0;
         unlockables.circlePatterns = new int[10] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        unlockables.stars = 0;
         saveUnlockables();
     }
 }
@@ -104,6 +106,7 @@ private void loadUnlockables()
 {
     string json = File.ReadAllText(unlockablesPath);
     unlockables = JsonUtility.FromJson<Unlockables>(json);
+    Stars = unlockables.stars;
 }
 
 // Save the current unlockables to the JSON file
@@ -297,6 +300,12 @@ public void ChangeGameState(int n){
             {
                 Score++;
                 Stars++;
+
+                // Manage star popup
+                starPopup.Appear();
+                starPopup.showText();
+                unlockables.stars = Stars;
+                saveUnlockables();
                 OnPointGain?.Invoke();
             }
             else
