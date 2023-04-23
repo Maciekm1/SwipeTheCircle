@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public static event Action OnPointGain;
     public static event Action OnPointLose;
     public static event Action OnGameLose;
+    public static event Action OnAdShow;
+    private int _addCounter = 0;
 
     // The current game state and game difficulty
     private GameState _gameState;
@@ -320,6 +322,11 @@ public void ChangeGameState(int n){
                 Lives--;
                 if(Lives < 0)
                 {
+                    _addCounter++;
+                    if(_addCounter > 3){
+                        OnAdShow?.Invoke();
+                        _addCounter = 0;
+                    }
                     if(Score > HighScore)
                     {
                         // Save highscore to the cloud
