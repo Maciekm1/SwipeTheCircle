@@ -103,6 +103,7 @@ public class CloudSaveManager : MonoBehaviour
         await AuthenticationService.Instance.UpdatePlayerNameAsync(s);
         await AuthenticationService.Instance.GetPlayerNameAsync();
         PlayerPrefs.SetString("playerName", AuthenticationService.Instance.PlayerName.Split("#")[0]);
+        gameManager.saveUnlockables();
         shopManager.updateShopName();
         }
         catch (AuthenticationException e)
