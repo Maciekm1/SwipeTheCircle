@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] SettingsManager settingsManager;
 
+    [SerializeField] LevelPlayAds levelPlayAds;
+
     // A list of UI states and a game object for the main menu
     [SerializeField] List<UIState> UIStateObjects;
     [SerializeField] GameObject MainMenuGO;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Events for points gained, points lost, and game loss
     public static event Action OnPointGain;
     public static event Action OnPointLose;
-    public static event Action OnGameLose;
+    public static Action OnGameLose;
     public static event Action OnAdShow;
     private int _addCounter = 0;
 
@@ -147,7 +149,7 @@ public GameState GetGameState()
 }
 
 // Change the state of all UI objects to the specified state
-private void ChangeUIState(State state)
+public void ChangeUIState(State state)
 {
     foreach (UIState item in UIStateObjects)
     {
@@ -297,6 +299,7 @@ public void ChangeGameState(int n){
 
     private void CheckTap()
     {
+        //Debug.LogError("!!! CURRENT STATE: " + _gameState + " !!!");
         if(_gameState == GameState.InGame){
             if (CurrentColor.ToString() == TargetColor.ToString())
             {
@@ -323,9 +326,8 @@ public void ChangeGameState(int n){
                 if(Lives < 0)
                 {
                     _addCounter++;
-                    if(_addCounter > 3){
-                        OnAdShow?.Invoke();
-                        _addCounter = 0;
+                    if(_addCounter == 2){
+                        levelPlayAds.loadFullSizeAdd();
                     }
                     if(Score > HighScore)
                     {
@@ -340,6 +342,11 @@ public void ChangeGameState(int n){
                     }
                     OnGameLose?.Invoke();
                     ChangeGameState(GameState.Lose);
+                    if(_addCounter == 4){
+                        levelPlayAds.showFullSizeAdd();
+                        OnAdShow?.Invoke();
+                        _addCounter = 0;
+                    }
                 }
             }
             float scoreMult = 1f - (Score * (int) GameDifficulty/ 50f);

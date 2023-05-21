@@ -28104,6 +28104,7 @@ GameObject:
   - component: {fileID: 1624273104}
   - component: {fileID: 1624273105}
   - component: {fileID: 1624273106}
+  - component: {fileID: 1624273107}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28141,6 +28142,7 @@ MonoBehaviour:
   cloudSaveManager: {fileID: 1175756795}
   uiManager: {fileID: 2057008787}
   settingsManager: {fileID: 1278964540}
+  levelPlayAds: {fileID: 1624273107}
   UIStateObjects:
   - {fileID: 513540400}
   - {fileID: 190922733}
@@ -28172,6 +28174,18 @@ MonoBehaviour:
   Shop: {fileID: 2110679944}
   LeaderBoard: {fileID: 1515860572}
   LogIn: {fileID: 1455770673}
+--- !u!114 &1624273107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624273103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7fdff16a8994268b1b51e43bf71395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1634515156
 GameObject:
   m_ObjectHideFlags: 0
