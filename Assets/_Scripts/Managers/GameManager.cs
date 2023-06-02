@@ -238,7 +238,7 @@ private void ExecuteState()
 }
 
 // Method that resets the game
-private async void ResetGame()
+public async void ResetGame()
 {
     // Display the game end UI in the UI manager
     uiManager.GameEndUI();
@@ -326,7 +326,7 @@ public void ChangeGameState(int n){
                 if(Lives < 0)
                 {
                     _addCounter++;
-                    if(_addCounter == 2){
+                    if(_addCounter == 1){
                         levelPlayAds.loadFullSizeAdd();
                     }
                     if(Score > HighScore)
@@ -340,13 +340,13 @@ public void ChangeGameState(int n){
                         AddScoreToLB(HighScore);
 
                     }
-                    OnGameLose?.Invoke();
-                    ChangeGameState(GameState.Lose);
-                    if(_addCounter == 4){
+                    if(_addCounter == 2){
                         levelPlayAds.showFullSizeAdd();
                         OnAdShow?.Invoke();
                         _addCounter = 0;
                     }
+                    OnGameLose?.Invoke();
+                    ChangeGameState(GameState.Lose);
                 }
             }
             float scoreMult = 1f - (Score * (int) GameDifficulty/ 50f);

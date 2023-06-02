@@ -27,7 +27,7 @@ public class LevelPlayAds : MonoBehaviour
     }
 
     private void SdkInitializationCompletedEvent(){
-
+        Debug.Log("Ads Loaded");
     }
 
     public void loadFullSizeAdd(){
@@ -67,14 +67,12 @@ void InterstitialOnAdShowFailedEvent(IronSourceError ironSourceError, IronSource
 }
 // Invoked when the interstitial ad closed and the user went back to the application screen.
 void InterstitialOnAdClosedEvent(IronSourceAdInfo adInfo) {
-    FindObjectOfType<UIManager>().UpdateGameElementsToMainMenu();
-    FindObjectOfType<GameManager>().ChangeGameState(GameState.MainMenu);
+    FindObjectOfType<GameManager>().ResetGame();
 }
 // Invoked before the interstitial ad was opened, and before the InterstitialOnAdOpenedEvent is reported.
 // This callback is not supported by all networks, and we recommend using it only if  
 // it's supported by all networks you included in your build. 
 void InterstitialOnAdShowSucceededEvent(IronSourceAdInfo adInfo) {
-    FindObjectOfType<UIManager>().UpdateGameElementsToMainMenu();
 }
 
 }

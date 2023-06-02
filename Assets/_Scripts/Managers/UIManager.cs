@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
         LeanTween.alpha(targetColour.GetComponent<RectTransform>(), 1f, 0.1f);
         LeanTween.alpha(ColourSwitchBar.GetComponent<RectTransform>(), 1f, 0.1f);
         ColourSwitchBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>().CrossFadeAlpha(1f, 0.1f, false);
-        gameManager.ChangeUIState(State.InGameIdle);
+        //gameManager.ChangeUIState(State.InGameIdle);
     }
 
     public void UpdateGameElementsToMainMenu()
@@ -121,7 +121,7 @@ public class UIManager : MonoBehaviour
         LeanTween.alpha(targetColour.GetComponent<RectTransform>(), 0f, 0.1f);
         LeanTween.alpha(ColourSwitchBar.GetComponent<RectTransform>(), 0f, 0.1f);
         ColourSwitchBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0f, 0.1f, false);
-        gameManager.ChangeUIState(State.MainMenuIdle);
+        //gameManager.ChangeUIState(State.MainMenuIdle);
     }
 
     public void GameEndUI(){

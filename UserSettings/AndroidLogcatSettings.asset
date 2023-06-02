@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "b921587d",
         "name": "com.MaciekZ.ColourTap",
-        "processId": 18697,
+        "processId": 8442,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -66,6 +66,36 @@
             "deviceId": "b921587d",
             "name": "com.MaciekZ.ColourTap",
             "processId": 18697,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 22230,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 23709,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 24478,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 7670,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 8442,
             "exited": false
         }
     ],

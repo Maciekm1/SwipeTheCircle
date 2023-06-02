@@ -72,9 +72,13 @@ public class CloudSaveManager : MonoBehaviour
     private async Task SignInAnon()
     {
         // Subscribe to events that occur after signing in
-        AuthenticationService.Instance.SignedIn += () =>
+        AuthenticationService.Instance.SignedIn += async () =>
         {
-            Debug.Log("Signed in as" + AuthenticationService.Instance.PlayerName);
+            await AuthenticationService.Instance.GetPlayerNameAsync();
+            Debug.Log("Signed in as" + AuthenticationService.Instance.PlayerName.Split("#")[0]);
+            shopManager.updateShopName(AuthenticationService.Instance.PlayerName.Split("#")[0]);
+            PlayerPrefs.SetString("playerName", AuthenticationService.Instance.PlayerName.Split("#")[0]);
+            
         };
         AuthenticationService.Instance.SignInFailed += s =>
         {
