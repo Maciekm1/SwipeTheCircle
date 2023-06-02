@@ -31,7 +31,7 @@ public class LeaderBoardUIManager : MonoBehaviour
         ClearEntries();
         for (int i = 0; i < results.Count; i++)
         {
-            if(i + 1< content.childCount && content.GetChild(i + 1) != null)
+            if(i + 1 < content.childCount && content.GetChild(i + 1) != null)
             {
                 content.GetChild(i + 1).gameObject.SetActive(true);
 
@@ -43,6 +43,9 @@ public class LeaderBoardUIManager : MonoBehaviour
                 if(results[i].PlayerName.Split("#")[0] == PlayerPrefs.GetString("playerName"))
                 {
                     content.GetChild(i + 1).transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 242, 102, 255);
+                }
+                else{
+                    content.GetChild(i + 1).transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                 }
             }
             else

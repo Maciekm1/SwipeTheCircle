@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateDifficultyText();
 
         // Set the target frame rate to 120 and change the game state to login
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
         ChangeGameState(GameState.LogIn);
 
         // Register a callback for when the play button is tapped
@@ -326,7 +326,7 @@ public void ChangeGameState(int n){
                 if(Lives < 0)
                 {
                     _addCounter++;
-                    if(_addCounter == 1){
+                    if(_addCounter == 4){
                         levelPlayAds.loadFullSizeAdd();
                     }
                     if(Score > HighScore)
@@ -340,13 +340,16 @@ public void ChangeGameState(int n){
                         AddScoreToLB(HighScore);
 
                     }
-                    if(_addCounter == 2){
+                    if(_addCounter == 7){
                         levelPlayAds.showFullSizeAdd();
                         OnAdShow?.Invoke();
                         _addCounter = 0;
                     }
-                    OnGameLose?.Invoke();
-                    ChangeGameState(GameState.Lose);
+                    else
+                    {
+                        OnGameLose?.Invoke();
+                        ChangeGameState(GameState.Lose);
+                    }
                 }
             }
             float scoreMult = 1f - (Score * (int) GameDifficulty/ 50f);

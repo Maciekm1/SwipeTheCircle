@@ -8,6 +8,10 @@ public abstract class UIState : MonoBehaviour
     protected Animator _animator;
     protected GameManager _gameManager;
 
+    public State getState(){
+        return _state;
+    }
+
     protected void Start() 
     {
         _animator = GetComponent<Animator>();

@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "b921587d",
         "name": "com.MaciekZ.ColourTap",
-        "processId": 8442,
+        "processId": 13654,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,91 +11,61 @@
         {
             "deviceId": "b921587d",
             "name": "com.MaciekZ.ColourTap",
-            "processId": 8323,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 20852,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 13098,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 13841,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 14484,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 15061,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 17861,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 15800,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 16616,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 18697,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
-            "processId": 22230,
-            "exited": false
-        },
-        {
-            "deviceId": "b921587d",
-            "name": "com.MaciekZ.ColourTap",
             "processId": 23709,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "b921587d",
             "name": "com.MaciekZ.ColourTap",
             "processId": 24478,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "b921587d",
             "name": "com.MaciekZ.ColourTap",
             "processId": 7670,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "b921587d",
             "name": "com.MaciekZ.ColourTap",
             "processId": 8442,
+            "exited": true
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 32566,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 4555,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 6506,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 9480,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 11796,
+            "exited": false
+        },
+        {
+            "deviceId": "b921587d",
+            "name": "com.MaciekZ.ColourTap",
+            "processId": 13654,
             "exited": false
         }
     ],
