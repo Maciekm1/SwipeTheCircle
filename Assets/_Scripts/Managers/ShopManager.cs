@@ -100,6 +100,7 @@ public class ShopManager : MonoBehaviour
 
             Debug.Log($"Purchase successful for {shopItems[i].Cost}");
             UpdateShopButtons();
+            uIManager.checkPlayerNameUpdateButton();
         }
     }
     public void enablePanels(){

@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI starsText;
     [SerializeField] private GameObject anonButton;
 
+    [SerializeField] private Button playerNameUpdate;
+
     private void Awake()
     {
         PlayButtonState.OnTapAction += OnTap;
@@ -148,6 +150,14 @@ public class UIManager : MonoBehaviour
     public void DeactivatePlayButton(){
         playButton.GetComponent<Button>().interactable = false;
 
+    }
+
+    public void checkPlayerNameUpdateButton(){
+        if(gameManager.Stars < 100){
+            playerNameUpdate.interactable = false;
+            return;
+        }
+        playerNameUpdate.interactable = true;
     }
 
 }
