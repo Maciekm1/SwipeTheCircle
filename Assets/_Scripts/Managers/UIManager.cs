@@ -31,9 +31,15 @@ public class UIManager : MonoBehaviour
     {
         PlayButtonState.OnTapAction += OnTap;
         GameManager.OnPointLose += loseLife;
+        gameManager = FindObjectOfType<GameManager>();
     }
     private void loseLife()
     {
+        Debug.Log(gameManager);
+        gameManager = FindObjectOfType<GameManager>();
+        Debug.Log(gameManager);
+        Debug.Log(gameManager.Lives);
+        Debug.Log(lives);
         if(gameManager.Lives >= 0)
         {
             LeanTween.scale(lives[gameManager.Lives], new Vector3(0, 0, 0), 0.7f).setEase(LeanTweenType.easeInOutElastic).setOnComplete(() => lives[gameManager.Lives+1].SetActive(false));

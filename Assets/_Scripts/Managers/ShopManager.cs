@@ -14,6 +14,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Image[] sprites;
     [SerializeField] private Button[] costButtons;
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private GameObject removeAdsButton;
+    [SerializeField] private int removeAdsCost = 1000;
 
     private void Start()
     {
@@ -21,7 +23,7 @@ public class ShopManager : MonoBehaviour
     }
 
     public void updateShopName(){
-        nameText.text = PlayerPrefs.GetString("playerName", "--");
+        nameText.text = PlayerPrefs.GetString("playerName", "-");
     }
 
     public void updateShopName(string inp){
@@ -77,6 +79,10 @@ public class ShopManager : MonoBehaviour
 
     public ShopItem GetShopItem(int i){
         return shopItems[i];
+    }
+
+    public ShopItem[] GetShopItemAll(){
+        return shopItems;
     }
 
     private void equipCirclePattern(int i)
@@ -145,5 +151,38 @@ public class ShopManager : MonoBehaviour
                 costButtons[i].interactable = false;
             }
         }
+
+        if(gameManager.unlockables.removeAds){
+            removeAdsButton.GetComponent<Button>().interactable = false;
+            removeAdsButton.GetComponent<Image>().color = new Color32(0, 160, 0, 255);
+            removeAdsButton.GetComponentInChildren<TextMeshProUGUI>().text = "removed";
+            removeAdsButton.transform.GetChild(0).gameObject.SetActive(false);
+            removeAdsButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().margin = new Vector4(0, 0, 0, 0);
+            return;
+        }
+
+        if(gameManager.Stars < removeAdsCost){
+            removeAdsButton.GetComponent<Button>().interactable = false;
+        }
+        else{
+            removeAdsButton.GetComponent<Button>().interactable = true;
+        }
+    }
+
+    public void RemoveAllAds(){
+        if(gameManager.Stars < removeAdsCost){ return; }
+        gameManager.Stars -= removeAdsCost;
+
+        removeAdsButton.GetComponent<Image>().color = new Color32(0, 160, 0, 255);
+        removeAdsButton.GetComponentInChildren<TextMeshProUGUI>().text = "removed";
+        removeAdsButton.transform.GetChild(0).gameObject.SetActive(false);
+        removeAdsButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().margin = new Vector4(0, 0, 0, 0);
+        removeAdsButton.GetComponent<Button>().interactable = false;
+
+        gameManager.AdShowIncrease = 0;
+
+        gameManager.unlockables.removeAds = true;
+        gameManager.saveUnlockables();
+
     }
 }

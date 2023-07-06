@@ -66,9 +66,12 @@ public class GameManager : MonoBehaviour
 
     private Vector3 mainmenuPos;
 
+    public int AdShowIncrease { get; set; }
+
     // Initializes the game manager
     private void Awake()
     {
+
         // Store the position of the main menu game object
         mainmenuPos = MainMenuGO.transform.position;
         // Set the path for the unlockables file
@@ -90,7 +93,7 @@ public class GameManager : MonoBehaviour
 // Print the path to the persistent data folder and the file name of the unlockables JSON file to the console
 private void Start()
 {
-    //Debug.Log($"{Application.persistentDataPath}/unlockables.json");
+    Debug.Log($"{Application.persistentDataPath}/unlockables.json");
     // If the unlockables file exists, load it. Otherwise, create a new unlockables object and save it.
     if(File.Exists(unlockablesPath))
     {
@@ -99,10 +102,21 @@ private void Start()
     else
     {
         unlockables.currentCirclePattern = 0;
-        unlockables.circlePatterns = new int[10] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        unlockables.circlePatterns = new int[FindObjectOfType<ShopManager>().GetShopItemAll().Length];
+        unlockables.removeAds = false;
+        unlockables.circlePatterns[0] = 1;
         unlockables.stars = 0;
         saveUnlockables();
     }
+
+    if(unlockables.removeAds){
+        AdShowIncrease = 0;
+    }
+    else{
+        AdShowIncrease = 1;
+    }
+    Debug.Log(unlockables.removeAds);
+    Debug.Log(AdShowIncrease);
 }
 
 // Load the unlockables from the JSON file
@@ -325,7 +339,7 @@ public void ChangeGameState(int n){
                 Lives--;
                 if(Lives < 0)
                 {
-                    _addCounter++;
+                    _addCounter += AdShowIncrease;
                     if(_addCounter == 4){
                         levelPlayAds.loadFullSizeAdd();
                     }

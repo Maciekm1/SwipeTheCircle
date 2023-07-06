@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Unlockables
 {
     public int currentCirclePattern;
+
+    public bool removeAds;
     public int[] circlePatterns;
 
     public int stars;
