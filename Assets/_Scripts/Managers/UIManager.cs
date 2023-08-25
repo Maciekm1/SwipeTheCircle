@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGameElementsToMainMenu()
     {
-        titleText.text = "Tap The Circle";
+        titleText.text = "Colour Tap";
         titleText.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
         prompt.SetActive(true);
         targetColour.SetActive(false);

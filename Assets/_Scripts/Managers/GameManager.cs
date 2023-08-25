@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
     // Initializes the game manager
     private void Awake()
     {
-
         // Store the position of the main menu game object
         mainmenuPos = MainMenuGO.transform.position;
         // Set the path for the unlockables file
